@@ -37,6 +37,7 @@ import { initCustomisationComponents } from "./Customisations";
 import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
 import { initBillsComponents } from "@egovernments/digit-ui-module-bills";
 // import { initReportsComponents } from "@egovernments/digit-ui-module-reports";
+import { BRModule ,initBRComponents ,BRLinks} from "@egovernments/digit-ui-module-wms";
 
 initLibraries();
 
@@ -63,7 +64,8 @@ const enabledModules = [
   "BillAmendment",
   "FireNoc",
   "Birth",
-  "Death"
+  "Death",
+  "wms"
 ];
 window.Digit.ComponentRegistryService.setupRegistry({
   ...paymentConfigs,
@@ -77,9 +79,12 @@ window.Digit.ComponentRegistryService.setupRegistry({
   HRMSModule,
   TLModule,
   TLLinks,
-  ReceiptsModule
+  ReceiptsModule,
+  BRModule,
+  BRLinks,
 });
 
+initBRComponents();
 initPGRComponents();
 initFSMComponents();
 initDSSComponents();

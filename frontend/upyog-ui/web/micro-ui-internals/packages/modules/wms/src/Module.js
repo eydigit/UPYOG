@@ -1,74 +1,74 @@
+import {  CitizenHomeCard, PTIcon } from "@egovernments/digit-ui-react-components";
 import React, { useEffect } from "react";
-import { useRouteMatch } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import EmployeeApp from "./pages/employee";
-import BillsCard from "./billHomeCard";
-import BillsFilter from "./components/BillsFilter";
-import BillInbox from "./pages/employee/SearchBill/BillInbox";
-import ActionModal from "./components/Modal";
-import BillDetails from "./pages/employee/BillDetails";
-import Banner from "./components/Banner";
-import GroupFilter from "./pages/employee/GroupBill/GroupFilter";
-import Inbox from "./pages/citizen/SearchBill/Inbox";
-import ApplicationCitizenCard from "./components/citizen/ApplicationCitizenCard";
-import SearchCitizen from "./components/citizen/SearchCitizen";
-import SearchCitizenFilter from "./components/citizen/SearchCitizenFilter";
-import CitizenInbox from "./components/citizen/inbox";
-import CitizenMobileInbox from "./components/citizen/CitizenMobileInbox";
+import { useRouteMatch } from "react-router-dom";
 import CitizenApp from "./pages/citizen";
-import { CitizenHomeCard, CollectionIcon } from "@egovernments/digit-ui-react-components";
-import CancelBills from "./components/CancelBill"; 
-import GroupBills from "./components/GroupBill"; 
-
-export const BillsModule = ({ stateCode, userType, tenants }) => {
-  const tenantId =  Digit.SessionStorage.get("CITIZEN.COMMON.HOME.CITY")?.code || Digit.ULBService.getCurrentTenantId();
-  const moduleCode = ["abg","ws", "pt", "common", tenantId, "bill-amend"];
-
-  const language = Digit.StoreData.getCurrentLanguage();
-  const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
-  const { path, url } = useRouteMatch();
-
-  Digit.SessionStorage.set("BILLS_TENANTS", tenants);
-
-  if (userType === "employee") {
-    return <EmployeeApp path={path} url={url} userType={"employee"} />;
-  } else return <CitizenApp />;
-};
-
-export const BillsLinks = ({ matchPath }) => {
-  const { t } = useTranslation();
-
-  const links = [
-    {
-      link: `${matchPath}/wmsui`,
-      i18nKey: t("ABG_SEARCH_BILL_COMMON_HEADER"),
-    },
-  ];
-  return <CitizenHomeCard header={t("ACTION_TEST_BILLGENIE")} links={links} Icon={() => <CollectionIcon className="fill-path-primary-main" />} />;
-};
+import Create from "./pages/citizen/create/index";
+import EmployeeApp from "./pages/employee";
+import BrSelectName from "./pagecomponents/BrSelectName";
+import BRSelectPhoneNumber from "./pagecomponents/BrSelectPhoneNumber";
+import BRSelectGender from "./pagecomponents/BRSelectGender";
+import BRSelectEmailId from "./pagecomponents/SelectEmailId";
+import BRSelectPincode from "./pagecomponents/BRSelectPincode";
+import BrSelectAddress from "./pagecomponents/BrSelectAddress";
+import SelectCorrespondenceAddress from "./pagecomponents/SelectCorrespondenceAddress";
+import SelectDocuments from "./pagecomponents/SelectDocuments";
+import BRCard from "./components/config/BRCard";
+import BRManageApplication from "./pages/employee/BRManageApplication";
+import RegisterDetails from "./pages/employee/RegisterDetails";
+import Response from "./pages/citizen/create/Response";
 
 const componentsToRegister = {
-  BillsModule,
-  BillsCard,
-  BillInbox: BillInbox,
-  BillDetails: BillDetails,
-  ActionModal,
-  Banner,
-  CitizenInbox,
-  SearchCitizen,
-  ApplicationCitizenCard,
-  SearchCitizenFilter,
-  CitizenMobileInbox,
-  BillsLinks,
-  CancelBills,
-  GroupBills,
-  BILLS_INBOX_FILTER: (props) => <BillsFilter {...props} />,
-  BILLS_GROUP_FILTER: (props) => <GroupFilter {...props} />,
-  CITIZEN_SEARCH_FILTER: (props) => <SearchCitizenFilter {...props} />,
+ Response,
+  RegisterDetails,
+  BRManageApplication,
+  BRCard,
+  SelectDocuments,
+  SelectCorrespondenceAddress,
+  BrSelectAddress,
+  BRSelectPincode,
+  BRSelectEmailId,
+  BRSelectGender,
+  BRSelectPhoneNumber,
+  BrSelectName,
+  BRCreate : Create,
 };
 
-export const initBillsComponents = () => {
+export const BRModule = ({ stateCode, userType, tenants }) => {
+  const { path, url } = useRouteMatch();
+
+  const moduleCode = "wms";
+  const language = Digit.StoreData.getCurrentLanguage();
+  const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
+
+  if (userType === "citizen") {
+    return <CitizenApp path={path} stateCode={stateCode} />;
+  }
+
+  return <EmployeeApp path={path} stateCode={stateCode} />;
+};
+
+export const BRLinks = ({ matchPath, userType }) => {
+  console.log("BR matchPath",matchPath)
+  const { t } = useTranslation();
+
+
+  const links = [
+  
+    {
+      link: `${matchPath}/birth`,
+      i18nKey: t("Create BirthRegistration"),
+    },
+   
+   
+  ];
+
+  return <CitizenHomeCard header={t("BirthRegistration")} links={links} Icon={() => <PTIcon className="fill-path-primary-main" />} />;
+};
+
+export const initBRComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {
     Digit.ComponentRegistryService.setComponent(key, value);
   });
 };
+

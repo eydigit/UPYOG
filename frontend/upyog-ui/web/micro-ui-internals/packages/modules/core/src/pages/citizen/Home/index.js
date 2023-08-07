@@ -67,6 +67,7 @@ const Home = () => {
       onClick: () => history.push(citizenServicesObj?.sideOption?.navigationUrl.replace("digit-ui","upyog-ui")),
     },
     options: [
+      
       {
         name: t(citizenServicesObj?.props?.[0]?.label),
         Icon: <ComplaintIcon />,
@@ -92,6 +93,12 @@ const Home = () => {
         Icon: <WSICon />,
         onClick: () => history.push(citizenServicesObj?.props?.[3]?.navigationUrl.replace("digit-ui","upyog-ui")),
       },
+      {
+        name: t("Birth-Registration"),
+        Icon: <OBPSIcon />,
+        // onClick: () => history.push("/digit-ui/citizen/br-home"),
+        onClick: () => history.push(`${citizenServicesObj?.props?.[4]?.navigationUrl.replace("digit-ui","upyog-ui")}/br-home`),
+      }
     ],
     styles: { display: "flex", flexWrap: "wrap", justifyContent: "flex-start", width: "100%" },
   };
@@ -122,6 +129,12 @@ const Home = () => {
         Icon: <DocumentIcon />,
         onClick: () => history.push(infoAndUpdatesObj?.props?.[3]?.navigationUrl.replace("digit-ui","upyog-ui")),
       },
+      {
+        name: t("Birth-Registration"),
+        Icon: <OBPSIcon />,
+        // onClick: () => history.push("/digit-ui/citizen/br-home"),
+        onClick: () => history.push(`${infoAndUpdatesObj?.props?.[4]?.navigationUrl.replace("digit-ui","upyog-ui")}/br-home`),
+      }
       // {
       //     name: t("CS_COMMON_HELP"),
       //     Icon: <HelpIcon/>
