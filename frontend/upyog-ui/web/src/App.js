@@ -37,7 +37,7 @@ import { initCustomisationComponents } from "./Customisations";
 import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
 import { initBillsComponents } from "@egovernments/digit-ui-module-bills";
 // import { initReportsComponents } from "@egovernments/digit-ui-module-reports";
-import { BRModule ,initBRComponents ,BRLinks} from "@egovernments/digit-ui-module-wms";
+import { WMSModule ,initWMSComponents ,WMSLinks} from "@egovernments/digit-ui-module-wms";
 
 initLibraries();
 
@@ -80,11 +80,11 @@ window.Digit.ComponentRegistryService.setupRegistry({
   TLModule,
   TLLinks,
   ReceiptsModule,
-  BRModule,
-  BRLinks,
+  WMSModule,
+  WMSLinks,
 });
 
-initBRComponents();
+initWMSComponents();
 initPGRComponents();
 initFSMComponents();
 initDSSComponents();

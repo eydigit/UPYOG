@@ -4,40 +4,40 @@ import { useTranslation } from "react-i18next";
 import { useRouteMatch } from "react-router-dom";
 import CitizenApp from "./pages/citizen";
 import Create from "./pages/citizen/create/index";
-import EmployeeApp from "./pages/employee";
-import BrSelectName from "./pagecomponents/BrSelectName";
-import BRSelectPhoneNumber from "./pagecomponents/BrSelectPhoneNumber";
-import BRSelectGender from "./pagecomponents/BRSelectGender";
-import BRSelectEmailId from "./pagecomponents/SelectEmailId";
-import BRSelectPincode from "./pagecomponents/BRSelectPincode";
-import BrSelectAddress from "./pagecomponents/BrSelectAddress";
+// import EmployeeApp from "./pages/employee";
+import WMSSelectName from "./pagecomponents/WMSSelectName";
+import WMSSelectPhoneNumber from "./pagecomponents/WMSSelectPhoneNumber";
+import WMSSelectGender from "./pagecomponents/WMSSelectGender";
+import SelectEmailId from "./pagecomponents/SelectEmailId";
+import WMSSelectPincode from "./pagecomponents/WMSSelectPincode";
+import WMSSelectAddress from "./pagecomponents/WMSSelectAddress";
 import SelectCorrespondenceAddress from "./pagecomponents/SelectCorrespondenceAddress";
 import SelectDocuments from "./pagecomponents/SelectDocuments";
-import BRCard from "./components/config/BRCard";
-import BRManageApplication from "./pages/employee/BRManageApplication";
-import RegisterDetails from "./pages/employee/RegisterDetails";
+import WMSCard from "./components/config/WMSCard";
+// import WMSManageApplication from "./pages/employee/WMSManageApplication";
+// import RegisterDetails from "./pages/employee/RegisterDetails";
 import Response from "./pages/citizen/create/Response";
 
 const componentsToRegister = {
  Response,
-  RegisterDetails,
-  BRManageApplication,
-  BRCard,
+  // RegisterDetails,
+  // WMSManageApplication,
+  WMSCard,
   SelectDocuments,
   SelectCorrespondenceAddress,
-  BrSelectAddress,
-  BRSelectPincode,
-  BRSelectEmailId,
-  BRSelectGender,
-  BRSelectPhoneNumber,
-  BrSelectName,
-  BRCreate : Create,
+  WMSSelectAddress,
+  WMSSelectPincode,
+  SelectEmailId,
+  WMSSelectGender,
+  WMSSelectPhoneNumber,
+  WMSSelectName,
+  WMSCreate : Create,
 };
 
-export const BRModule = ({ stateCode, userType, tenants }) => {
+export const WMSModule = ({ stateCode, userType, tenants }) => {
   const { path, url } = useRouteMatch();
 
-  const moduleCode = "wms";
+  const moduleCode = "WMS";
   const language = Digit.StoreData.getCurrentLanguage();
   const { isLoading, data: store } = Digit.Services.useStore({ stateCode, moduleCode, language });
 
@@ -45,11 +45,11 @@ export const BRModule = ({ stateCode, userType, tenants }) => {
     return <CitizenApp path={path} stateCode={stateCode} />;
   }
 
-  return <EmployeeApp path={path} stateCode={stateCode} />;
+  // return <EmployeeApp path={path} stateCode={stateCode} />;
 };
 
-export const BRLinks = ({ matchPath, userType }) => {
-  console.log("BR matchPath",matchPath)
+export const WMSLinks = ({ matchPath, userType }) => {
+  console.log("WMS matchPath",matchPath)
   const { t } = useTranslation();
 
 
@@ -66,7 +66,7 @@ export const BRLinks = ({ matchPath, userType }) => {
   return <CitizenHomeCard header={t("BirthRegistration")} links={links} Icon={() => <PTIcon className="fill-path-primary-main" />} />;
 };
 
-export const initBRComponents = () => {
+export const initWMSComponents = () => {
   Object.entries(componentsToRegister).forEach(([key, value]) => {
     Digit.ComponentRegistryService.setComponent(key, value);
   });

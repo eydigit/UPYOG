@@ -10,7 +10,9 @@ const Create = () => {
   const configs = newConfig?newConfig:newConfig;
 
   return (
-    <FormComposer
+    <React.Fragment>
+      <div>Create WMS</div>
+    {/* <FormComposer
     heading={t("Create Birth Registration WSS")}
     label={t("ES_COMMON_APPLICATION_SUBMIT")}
     config={configs.map((config) => {
@@ -21,7 +23,8 @@ const Create = () => {
     })}
   
     fieldStyle={{ marginRight: 0 }}
-  />
+  /> */}
+  </React.Fragment>
   );
 };
 

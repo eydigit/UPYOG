@@ -18,6 +18,8 @@ import StaticDynamicCard from "./StaticDynamicComponent/StaticDynamicCard";
 import AcknowledgementCF from "../../components/AcknowledgementCF";
 import CitizenFeedback from "../../components/CitizenFeedback";
 import Search from "./SearchApp";
+import Create from "@egovernments/digit-ui-module-wms/src/pages/citizen/create";
+import Response from "@egovernments/digit-ui-module-wms/src/pages/citizen/create/Response";
 const sidebarHiddenFor = [
   "upyog-ui/citizen/register/name",
   "/upyog-ui/citizen/select-language",
@@ -216,7 +218,12 @@ const Home = ({
           <PrivateRoute path={`${path}/user/profile`}>
             <UserProfile stateCode={stateCode} userType={"citizen"} cityDetails={cityDetails} />
           </PrivateRoute>
-
+          <PrivateRoute path={`${path}/wms-home`}>
+            <UserProfile stateCode={stateCode} userType={"citizen"} cityDetails={cityDetails} />
+            <Create />
+            <Response />
+            {/* <HomeWMS /> */}
+          </PrivateRoute>
           <Route path={`${path}/Audit`}>
             <Search/>
           </Route>

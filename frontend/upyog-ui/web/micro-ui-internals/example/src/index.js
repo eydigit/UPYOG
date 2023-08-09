@@ -35,7 +35,7 @@ import "@upyog-niua/upyog-css/example/index.css";
 // import { subFormRegistry } from "@egovernments/digit-ui-libraries";
 
 import { pgrCustomizations, pgrComponents } from "./pgr";
-import { BRModule, initBRComponents ,BRLinks} from "@egovernments/digit-ui-module-wms";
+import { WMSModule, initWMSComponents ,WMSLinks} from "@egovernments/digit-ui-module-wms";
 var Digit = window.Digit || {};
 
 const enabledModules = [
@@ -62,7 +62,7 @@ const enabledModules = [
   "FireNoc",
   "Birth",
   "Death",
-  "wms"
+  "WMS"
 ];
 
 const initTokens = (stateCode) => {
@@ -106,13 +106,13 @@ const initDigitUI = () => {
     // HRMSModule,
     ReceiptsModule,
     BillsModule,
-    BRModule,
-    BRLinks
+    WMSModule,
+    WMSLinks
     // TLModule,
     // TLLinks,
   });
 
-  initBRComponents();
+  initWMSComponents();
   initFSMComponents();
   initPGRComponents();
   initDSSComponents();

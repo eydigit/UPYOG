@@ -10,7 +10,8 @@ import {
   PGRIcon,
   PTIcon,
   TLIcon,
-  WSICon,
+  WSICon
+  // WMSIcon
 } from "@egovernments/digit-ui-react-components";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -73,6 +74,8 @@ const iconSelector = (code) => {
       return <TLIcon className="fill-path-primary-main" />;
     case "OBPS":
       return <OBPSIcon className="fill-path-primary-main" />;
+      // case "WMS":
+      // return <WMSIcon className="fill-path-primary-main" />;
     case "Bills":
       return <BillsIcon className="fill-path-primary-main" />;
     default:

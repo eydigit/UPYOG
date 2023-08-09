@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const App = () => {
   const { path, url, ...match } = useRouteMatch();
+  console.log("path WMS ",path)
   const { t } = useTranslation();
 
   const Create = Digit?.ComponentRegistryService?.getComponent("BRCreate");
