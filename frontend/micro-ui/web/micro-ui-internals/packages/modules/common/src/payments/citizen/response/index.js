@@ -4,6 +4,20 @@ import { useTranslation } from "react-i18next";
 import { useQueryClient } from "react-query";
 import { Link, useParams } from "react-router-dom";
 
+export const convertEpochToDate = (dateEpoch) => {
+  // Returning NA in else case because new Date(null) returns Current date from calender
+  if (dateEpoch) {
+    const dateFromApi = new Date(dateEpoch);
+    let month = dateFromApi.getMonth() + 1;
+    let day = dateFromApi.getDate();
+    let year = dateFromApi.getFullYear();
+    month = (month > 9 ? "" : "0") + month;
+    day = (day > 9 ? "" : "0") + day;
+    return `${day}/${month}/${year}`;
+  } else {
+    return "NA";
+  }
+};
 export const SuccessfulPayment = (props)=>{
   if(localStorage.getItem("BillPaymentEnabled")!=="true"){
     window.history.forward();
@@ -356,7 +370,7 @@ export const SuccessfulPayment = (props)=>{
       <div style={{display:"flex"}}>
       {business_service == "TL" ? (
         <div className="primary-label-btn d-grid" style={{ marginLeft: "unset", marginRight: "20px", marginTop:"15px",marginBottom:"15px" }} onClick={printReciept}>
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#a82227">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#f47738">
             <path d="M0 0h24v24H0V0z" fill="none" />
             <path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5z" />
           </svg>
@@ -365,7 +379,7 @@ export const SuccessfulPayment = (props)=>{
       ) : null}
       {business_service == "TL" ? (
         <div className="primary-label-btn d-grid" style={{ marginLeft: "unset", marginTop:"15px" }} onClick={printCertificate}>
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#a82227">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#f47738">
             <path d="M0 0h24v24H0V0z" fill="none" />
             <path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5z" />
           </svg>
@@ -399,7 +413,7 @@ export const SuccessfulPayment = (props)=>{
             {t("CS_DOWNLOAD_RECEIPT")}
           </div>
       ) : null}
-      {!(business_service == "TL") || !(business_service?.includes("PT")) && <SubmitBar onSubmit={printReciept} label={t("COMMON_DOWNLOAD_RECEIPT")} />}
+      {!(business_service == "TL" || business_service?.includes("WS")) || !(business_service?.includes("PT")) && <SubmitBar onSubmit={printReciept} label={t("COMMON_DOWNLOAD_RECEIPT")} />}
       {!(business_service == "TL") || !(business_service?.includes("PT")) && (
         <div className="link" style={isMobile ? { marginTop: "8px", width: "100%", textAlign: "center" } : { marginTop: "8px" }}>
           <Link to={`/digit-ui/citizen`}>{t("CORE_COMMON_GO_TO_HOME")}</Link>
