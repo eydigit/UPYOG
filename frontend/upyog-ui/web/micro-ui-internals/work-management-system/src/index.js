@@ -2,27 +2,27 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { initLibraries } from "@egovernments/digit-ui-libraries";
-import { PGRReducers } from "@egovernments/digit-ui-module-pgr";
-import { PTModule, PTLinks, PTComponents } from "@egovernments/digit-ui-module-pt";
+//import { PGRReducers } from "@egovernments/digit-ui-module-pgr";
+//import { PTModule, PTLinks, PTComponents } from "@egovernments/digit-ui-module-pt";
  import { WMSModule, initWMSComponents, WMSLinks} from "@egovernments/digit-ui-module-wms";
 //import { MCollectModule, MCollectLinks } from "@egovernments/digit-ui-module-mcollect";
 // import { TLModule, TLLinks } from "@egovernments/digit-ui-module-tl";
-import { initFSMComponents } from "@egovernments/digit-ui-module-fsm";
-import { initPGRComponents } from "@egovernments/digit-ui-module-pgr";
+//import { initFSMComponents } from "@egovernments/digit-ui-module-fsm";
+//import { initPGRComponents } from "@egovernments/digit-ui-module-pgr";
 //import { initDSSComponents } from "@egovernments/digit-ui-module-dss";
 //import { initHRMSComponents } from "@egovernments/digit-ui-module-hrms";
 //import { initReceiptsComponents, ReceiptsModule } from "@egovernments/digit-ui-module-receipts";
 // import { initReportsComponents } from "@egovernments/digit-ui-module-reports";
 //import { initMCollectComponents } from "@egovernments/digit-ui-module-mcollect";
-import { initTLComponents } from "@egovernments/digit-ui-module-tl";
+//import { initTLComponents } from "@egovernments/digit-ui-module-tl";
 import { PaymentModule, PaymentLinks, paymentConfigs } from "@egovernments/digit-ui-module-common";
 //import { HRMSModule } from "@egovernments/digit-ui-module-hrms";
-import { initOBPSComponents } from "@egovernments/digit-ui-module-obps";
+//import { initOBPSComponents } from "@egovernments/digit-ui-module-obps";
 //import { initEngagementComponents } from "@egovernments/digit-ui-module-engagement";
 //import { initNOCComponents } from "@egovernments/digit-ui-module-noc";
-import { initWSComponents } from "@egovernments/digit-ui-module-ws";
+//import { initWSComponents } from "@egovernments/digit-ui-module-ws";
 import { DigitUI } from "@egovernments/digit-ui-module-core";
-import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
+//import { initCommonPTComponents } from "@egovernments/digit-ui-module-commonpt";
 //import { initBillsComponents, BillsModule } from "@egovernments/digit-ui-module-bills";
 
 // import {initCustomisationComponents} from "./customisations";
@@ -35,35 +35,35 @@ import "@upyog-niua/upyog-css/work-management-system/index.css";
 
 // import { subFormRegistry } from "@egovernments/digit-ui-libraries";
 
-import { pgrCustomizations, pgrComponents } from "./pgr";
+//import { pgrCustomizations, pgrComponents } from "./pgr";
 
 var Digit = window.Digit || {};
 
 const enabledModules = [
-  "PGR",
-  "FSM",
-  "Payment",
-  "PT",
-  "QuickPayLinks",
+  //"PGR",
+ // "FSM",
+ // "Payment",
+ // "PT",
+ // "QuickPayLinks",
 //  "DSS",
 //  "MCollect",
  // "HRMS",
-  "TL",
+ // "TL",
   //"Receipts",
-  "Reports",
-  "OBPS",
+ // "Reports",
+ // "OBPS",
  // "Engagement",
  // "NOC",
-  "WS",
+ // "WS",
   "WMS",
   // "CommonPT",
-  "NDSS",
+ /// "NDSS",
   //"Bills",
-  "SW",
+ // "SW",
  // "BillAmendment",
-  "FireNoc",
-  "Birth",
-  "Death"
+ // "FireNoc",
+ // "Birth",
+ // "Death"
 ];
 
 const initTokens = (stateCode) => {
@@ -95,14 +95,14 @@ const initTokens = (stateCode) => {
 
 const initDigitUI = () => {
   window?.Digit.ComponentRegistryService.setupRegistry({
-    ...pgrComponents,
-    PaymentModule,
+   // ...pgrComponents,
+   // PaymentModule,
     WMSModule,
-    ...paymentConfigs,
-    PaymentLinks,
-    PTModule,
-    PTLinks,
-    ...PTComponents,
+    //...paymentConfigs,
+    //PaymentLinks,
+    //PTModule,
+    //PTLinks,
+    //...PTComponents,
  //   MCollectLinks,
 //    MCollectModule,
   //  HRMSModule,
@@ -113,35 +113,35 @@ const initDigitUI = () => {
     // TLLinks,
   });
 
-  initFSMComponents();
-  initPGRComponents();
+  //initFSMComponents();
+  ///initPGRComponents();
 //  initDSSComponents();
  // initMCollectComponents();
   //initHRMSComponents();
-  initTLComponents();
+  //initTLComponents();
  // initReceiptsComponents();
   // initReportsComponents();
-  initOBPSComponents();
+  //initOBPSComponents();
  // initEngagementComponents();
   //initNOCComponents();
-  initWSComponents();
+  //initWSComponents();
   initWMSComponents();
-  initCommonPTComponents();
+  //initCommonPTComponents();
   //initBillsComponents();
 
   // initCustomisationComponents();
 
-  const moduleReducers = (initData) => ({
-    pgr: PGRReducers(initData),
-  });
+  //const moduleReducers = (initData) => ({
+    //pgr: PGRReducers(initData),
+  //});
 
   window.Digit.Customizations = {
-    PGR: pgrCustomizations,
-    TL: {
-      customiseCreateFormData: (formData, licenceObject) => licenceObject,
-      customiseRenewalCreateFormData: (formData, licenceObject) => licenceObject,
-      customiseSendbackFormData: (formData, licenceObject) => licenceObject,
-    },
+    //PGR: pgrCustomizations,
+    //TL: {
+     // customiseCreateFormData: (formData, licenceObject) => licenceObject,
+     // customiseRenewalCreateFormData: (formData, licenceObject) => licenceObject,
+     // customiseSendbackFormData: (formData, licenceObject) => licenceObject,
+    //},
   };
 
   const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || "pb";
