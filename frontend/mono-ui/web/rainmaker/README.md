@@ -12,7 +12,7 @@ Note : Node should be above version 8.
 
 
 ```
-$ npm install --global lerna
+$ npm install --global lerna@2.11.0
 
 ```
 
