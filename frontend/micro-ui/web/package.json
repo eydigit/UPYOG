@@ -8,6 +8,7 @@
     "micro-ui-internals/packages/react-components",
     "micro-ui-internals/packages/modules/common",
     "micro-ui-internals/packages/modules/core",
+    "micro-ui-internals/packages/modules/edss",
     "micro-ui-internals/packages/modules/dss",
     "micro-ui-internals/packages/modules/engagement",
     "micro-ui-internals/packages/modules/pgr",

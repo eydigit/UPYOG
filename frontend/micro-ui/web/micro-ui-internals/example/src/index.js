@@ -9,6 +9,7 @@ import { MCollectModule, MCollectLinks } from "@egovernments/digit-ui-module-mco
 import { initFSMComponents } from "@egovernments/digit-ui-module-fsm";
 import { initPGRComponents } from "@egovernments/digit-ui-module-pgr";
 import { initDSSComponents } from "@egovernments/digit-ui-module-dss";
+import { initEDSSComponents } from "@egovernments/digit-ui-module-edss";
 import { initHRMSComponents } from "@egovernments/digit-ui-module-hrms";
 import { initReceiptsComponents, ReceiptsModule } from "@egovernments/digit-ui-module-receipts";
 // import { initReportsComponents } from "@egovernments/digit-ui-module-reports";
@@ -45,6 +46,7 @@ const enabledModules = [
   "PT",
   "QuickPayLinks",
   "DSS",
+  "EDSS",
   "MCollect",
   "HRMS",
   "TL",
@@ -113,6 +115,7 @@ const initDigitUI = () => {
   initFSMComponents();
   initPGRComponents();
   initDSSComponents();
+  initEDSSComponents();
   initMCollectComponents();
   initHRMSComponents();
   initTLComponents();

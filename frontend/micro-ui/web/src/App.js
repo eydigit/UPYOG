@@ -12,6 +12,7 @@ import {
 } from "@egovernments/digit-ui-module-pt";
 import { MCollectModule, MCollectLinks, initMCollectComponents } from "@egovernments/digit-ui-module-mcollect";
 import { initDSSComponents } from "@egovernments/digit-ui-module-dss";
+import { initEDSSComponents } from "@egovernments/digit-ui-module-edss";
 import {
   PaymentModule,
   PaymentLinks,
@@ -47,6 +48,7 @@ const enabledModules = [
   "PT",
   "QuickPayLinks",
   "DSS",
+  "EDSS",
   "NDSS",
   "MCollect",
   "HRMS",
@@ -83,6 +85,7 @@ window.Digit.ComponentRegistryService.setupRegistry({
 initPGRComponents();
 initFSMComponents();
 initDSSComponents();
+initEDSSComponents();
 initMCollectComponents();
 initHRMSComponents();
 initTLComponents();
@@ -108,7 +111,7 @@ function App() {
     return <h1>stateCode is not defined</h1>;
   }
   return (
-    <DigitUI
+    <DigitUI 
       stateCode={stateCode}
       enabledModules={enabledModules}
       moduleReducers={moduleReducers}
