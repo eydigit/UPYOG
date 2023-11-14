@@ -123,6 +123,76 @@ public class MetadataServiceImpl implements MetadataService {
 
 		return dbArray;
 	}
+	
+	@Override
+	public ArrayNode getEdashboardConfiguration(String dashboardId, String catagory, List<RoleDto> roleIds) throws AINException, IOException {
+
+		Calendar cal = Calendar.getInstance();
+		cal.set(cal.getWeekYear()-1, Calendar.APRIL, 1);
+		Date startDate = cal.getTime();
+		Date endDate = new Date();
+
+		String fyInfo = "From " + Constants.DASHBOARD_DATE_FORMAT.format(startDate) + " to " + Constants.DASHBOARD_DATE_FORMAT.format(endDate);
+
+
+		ObjectNode dashBoardNode = configurationLoader.get(ConfigurationLoader.EMASTER_DASHBOARD_CONFIG);
+		ArrayNode dasboardNodes = (ArrayNode) dashBoardNode.findValue(Constants.DashBoardConfig.DASHBOARDS);
+
+		ObjectNode roleMappingNode = configurationLoader.get(ConfigurationLoader.ROLE_DASHBOARD_CONFIG);
+		ArrayNode rolesArray = (ArrayNode) roleMappingNode.findValue(Constants.DashBoardConfig.ROLES);
+		ArrayNode dbArray = JsonNodeFactory.instance.arrayNode();
+		for(JsonNode role: rolesArray){
+			logger.info("role name: " + role.get("roleName"));
+			logger.info("role ID: " + role.get("roleId"));
+			String roleId = role.get("roleId").asText();
+
+			//Object roleId = roleIds.stream().filter(x -> role.get(Constants.DashBoardConfig.ROLE_ID).asLong() == (x.getId())).findAny().orElse(null);
+			if (null != roleId) {
+				ArrayNode visArray = JsonNodeFactory.instance.arrayNode();
+				for(JsonNode db : role.get(Constants.DashBoardConfig.DASHBOARDS)){
+					ObjectNode copyDashboard = objectMapper.createObjectNode();
+
+					JsonNode name = JsonNodeFactory.instance.textNode("");
+					JsonNode id = JsonNodeFactory.instance.textNode("");
+					JsonNode title = JsonNodeFactory.instance.textNode(fyInfo);
+					if (db.get(Constants.DashBoardConfig.ID).asText().equalsIgnoreCase(dashboardId)) {
+						//dasboardNodes.forEach(dbNode -> {
+						for(JsonNode dbNode : dasboardNodes){
+							if (dbNode.get(Constants.DashBoardConfig.ID).asText().equalsIgnoreCase(dashboardId)) {
+								logger.info("dbNode: " + dbNode);
+								name = dbNode.get(Constants.DashBoardConfig.NAME);
+								id = dbNode.get(Constants.DashBoardConfig.ID);
+
+								if (catagory != null) {
+									dbNode.get(Constants.DashBoardConfig.VISUALISATIONS).forEach(visual -> {
+										if (visual.get(Constants.DashBoardConfig.NAME).asText().equalsIgnoreCase(catagory))
+											visArray.add(visual);
+									});
+								} else {
+									dbNode.get(Constants.DashBoardConfig.VISUALISATIONS).forEach(visual -> {
+										visArray.add(visual);
+									});
+								}
+							}
+							copyDashboard.set(Constants.DashBoardConfig.NAME, name);
+							copyDashboard.set(Constants.DashBoardConfig.ID, id);
+							//add TITLE with varible dynamically
+							copyDashboard.set(Constants.DashBoardConfig.TITLE, title);
+
+							copyDashboard.set(Constants.DashBoardConfig.VISUALISATIONS, visArray);
+							copyDashboard.set("roleId", role.get("roleId"));
+							copyDashboard.set("roleName", role.get("roleName"));
+
+						}//);
+						dbArray.add(copyDashboard);
+					}
+				}
+
+			}
+		}
+
+		return dbArray;
+	}
 
 /*	@Override
 	public ArrayNode getDashboardConfiguration(String dashboardId, String catagory, List<RoleDto> roleIds) throws AINException, IOException {

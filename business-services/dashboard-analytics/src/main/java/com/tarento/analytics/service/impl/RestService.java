@@ -9,20 +9,22 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -43,6 +45,12 @@ public class RestService {
 
     @Autowired
     private RetryTemplate retryTemplate;
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    private ObjectMapper objectMapper;
 
 
     /**
@@ -158,6 +166,32 @@ public class RestService {
         String authString = String.format("%s:%s", userName, password);
         byte[] encodedAuthString = Base64.encodeBase64(authString.getBytes(Charset.forName(US_ASCII)));
         return String.format(BASIC_AUTH, new String(encodedAuthString));
+    }
+    
+    public JsonNode searchInPgsql(String searchQuery) {
+        LOGGER.info("Searching PostgreSQL for Query: " + searchQuery);
+        JsonNode responseNode = null;
+
+        try {
+            // Execute the SQL query directly using JdbcTemplate
+            List<Map<String, Object>> queryResult = jdbcTemplate.queryForList(searchQuery);
+
+            // Print the query result for debugging
+            System.out.println("Query Result: " + queryResult);
+
+            // Convert the query result to a JSON response (you may need to format it as needed)
+           
+            responseNode = objectMapper.valueToTree(queryResult);
+
+            // Print the JSON response for debugging
+            System.out.println("PostgreSQL query result: " + responseNode);
+
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            LOGGER.error("Database error while searching PostgreSQL: " + e.getMessage());
+        }
+
+        return responseNode;
     }
 
 }

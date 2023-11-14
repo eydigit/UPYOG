@@ -13,6 +13,7 @@ import com.tarento.analytics.exception.AINException;
 public interface ClientService {
 
 	public AggregateDto getAggregatedData(AggregateRequestDto req, List<RoleDto> roles) throws AINException, IOException;
+	public AggregateDto getPgAggregatedData(AggregateRequestDto req, List<RoleDto> roles) throws AINException, IOException;
 	public List<DashboardHeaderDto> getHeaderData(CummulativeDataRequestDto requestDto, List<RoleDto> roles) throws AINException;
 
 	/**

@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.json.JSONArray;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.tarento.analytics.dto.RoleDto;
 import com.tarento.analytics.exception.AINException;
 
 public interface MetadataService {
 
 	public Object getDashboardConfiguration(String dashboardId, String catagory, List<RoleDto> roleIds) throws AINException, IOException;
+	public ArrayNode getEdashboardConfiguration(String dashboardId, String catagory, List<RoleDto> roleIds) throws AINException, IOException;
 	public JSONArray getTargetDistrict() throws Exception ; 
 
 }

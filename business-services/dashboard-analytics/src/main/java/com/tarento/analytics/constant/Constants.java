@@ -65,6 +65,7 @@ public class Constants {
 	
 	public interface ConfigurationFiles { 
 		final static String CHART_API_CONFIG = "ChartApiConfig.json"; 
+		final static String ECHART_API_CONFIG = "EChartApiConfig.json"; 
 	}
 	
 	public interface JsonPaths { 

@@ -114,7 +114,26 @@ public class DashboardController {
 
 		return ResponseGenerator.successResponse(metadataService.getDashboardConfiguration(dashboardId, catagory, user.getRoles()));
 	}
+	
+	@RequestMapping(value = PathRoutes.DashboardApi.GET_EDASHBOARD_CONFIG + "/{dashboardId}", method = RequestMethod.GET)
+	public String getEdashboardConfiguration(@PathVariable String dashboardId, @RequestParam(value="catagory", required = false) String catagory, @RequestHeader(value = "x-user-info", required = false) String xUserInfo)
+			throws AINException, IOException {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		UserDto user = new UserDto();
+		user.setId(new Long("10007"));
+		user.setOrgId("1");
+		user.setCountryCode("");
+		RoleDto role = new RoleDto();
+		role.setId(new Long("6"));
+		role.setName("HR User");
+		List<RoleDto> roles = new ArrayList<>();
+		roles.add(role);
+		user.setRoles(roles);
+		//gson.fromJson(xUserInfo, UserDto.class);
 
+		return ResponseGenerator.successResponse(metadataService.getEdashboardConfiguration(dashboardId, catagory, user.getRoles()));
+	}
+	
 	@RequestMapping(value = PathRoutes.DashboardApi.GET_CHART_V2, method = RequestMethod.POST)
 	public String getVisualizationChartV2( @RequestBody RequestDto requestDto, @RequestHeader(value = "x-user-info", required = false) String xUserInfo, ServletWebRequest request)
 			throws IOException {
@@ -173,6 +192,60 @@ public class DashboardController {
 		return response;
 	}
 	
+	
+	@RequestMapping(value = PathRoutes.DashboardApi.GET_PG_CHART, method = RequestMethod.POST)
+	public String getPgVisualizationChart( @RequestBody RequestDto requestDto, @RequestHeader(value = "x-user-info", required = false) String xUserInfo, ServletWebRequest request)
+			throws IOException {
+
+		UserDto user = new UserDto();
+		logger.info("user"+xUserInfo);
+
+		//Getting the request information only from the Full Request
+		AggregateRequestDto requestInfo = requestDto.getAggregationRequestDto();
+
+		// For performance enhancement, this creates a key which will cache the response
+		String requestBodyString = objectMapper.writeValueAsString(requestInfo);
+		String headersString = objectMapper.writeValueAsString(requestDto.getHeaders());
+		StringBuilder finalString = new StringBuilder(requestBodyString).append(headersString);
+		requestInfo.setHashKey(finalString.toString().hashCode());
+
+		Map<String, Object> headers = requestDto.getHeaders();
+		String response = "";
+		try {
+			if (headers.isEmpty()) {
+				logger.error("Please provide header details");
+				throw new AINException(ErrorCode.ERR320, "header is missing");
+			}
+			if (headers.get("tenantId") == null) {
+				logger.error("Please provide tenant ID details");
+				throw new AINException(ErrorCode.ERR320, "tenant is missing");
+
+			}
+			
+			if(requestDto.getAggregationRequestDto() == null) { 
+				logger.error("Please provide requested Visualization Details");
+				throw new AINException(ErrorCode.ERR320, "Visualization Request is missing");
+			}
+			/*if(requestDto.getAggregationRequestDto().getRequestId() == null) { 
+				logger.error("Please provide Request ID");
+				throw new AINException(ErrorCode.ERR320, "Request ID is missing. Insights will not work");
+			}*/
+
+
+			// To be removed once the development is complete
+			if(StringUtils.isBlank(requestInfo.getModuleLevel())) {
+				requestInfo.setModuleLevel(Constants.Modules.HOME_REVENUE);
+			}
+
+			Object responseData = clientServiceFactory.getChartId(requestInfo.getVisualizationCode()).getPgAggregatedData(requestInfo, user.getRoles());
+			response = ResponseGenerator.successResponse(responseData);
+
+		} catch (AINException e) {
+			logger.error("error while executing api getVisualizationChart");
+			response = ResponseGenerator.failureResponse(e.getErrorCode(), e.getErrorMessage());
+		}
+		return response;
+	}
 /*
 	@RequestMapping(value = PathRoutes.DashboardApi.GET_CHART_V3, method = RequestMethod.POST)
 	public String getVisualizationChartV3(@RequestBody RequestDtoV3 requestDtoV3, @RequestHeader(value = "x-user-info", required = false) String xUserInfo, ServletWebRequest request)

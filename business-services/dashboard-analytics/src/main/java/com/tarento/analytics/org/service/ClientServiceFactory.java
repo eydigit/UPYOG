@@ -42,5 +42,18 @@ public class ClientServiceFactory {
             return tarentoServiceImpl;
 
     }
+    
+    public ClientService getChartId(String chartId){
+
+        ObjectNode node = configurationLoader.get(Constants.ConfigurationFiles.ECHART_API_CONFIG);
+        ObjectNode chartNode = (ObjectNode) node.get(chartId);
+        boolean mdmsEnable = chartNode.get(Constants.JsonPaths.IS_MDMS_ENABALED) == null ? false : chartNode.get(Constants.JsonPaths.IS_MDMS_ENABALED).asBoolean();
+
+        if(mdmsEnable)
+            return mdmsServiceImpl;
+        else
+            return tarentoServiceImpl;
+
+    }
 
 }

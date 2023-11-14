@@ -160,4 +160,11 @@ public class MdmsServiceImpl implements ClientService {
     public List<DashboardHeaderDto> getHeaderData(CummulativeDataRequestDto requestDto, List<RoleDto> roles) throws AINException {
         return null;
     }
+
+	@Override
+	public AggregateDto getPgAggregatedData(AggregateRequestDto req, List<RoleDto> roles)
+			throws AINException, IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

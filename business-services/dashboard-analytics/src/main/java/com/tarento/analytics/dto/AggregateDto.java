@@ -3,6 +3,7 @@ package com.tarento.analytics.dto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import com.tarento.analytics.enums.ChartType;
 
@@ -19,6 +20,8 @@ public class AggregateDto {
 	private String chartFormat;
 
 	private String drillDownChartId;
+	
+	private JsonNode queryResult; 
 
 	public String getVisualizationCode() {
 		return visualizationCode;
@@ -92,4 +95,15 @@ public class AggregateDto {
 	public void setFilter(Object filter) {
 		this.filter = filter;
 	}
+	
+	  public JsonNode getQueryResult() {
+          return queryResult;
+      }
+
+      public void setQueryResult(JsonNode queryResult) {
+          this.queryResult = queryResult;
+      }
+      public boolean isQueryResultNull() {
+          return queryResult == null;
+      }
 }
