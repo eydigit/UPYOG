@@ -1,0 +1,23 @@
+
+ {
+  "mcTodaysCollection": {
+    "chartName": "DSS_TOTAL_COLLECTION_TODAY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "aggrQuery":"select * from eg_pt_property WHERE ID='8ecad1b9-64f0-40d2-983d-70011f93e8bb'"      
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Todays Collection"
+    ],
+    "insight": {},
+    "_comment": " "
+  }
+  }
