@@ -255,13 +255,17 @@ public class Util {
 			rolesTenantList.add(role.getTenantId());
 			rolecodeList.add(role.getCode());
 		}
-
+		log.info("Exclusion Employee Role Code list from code -- "+statelevelRolecodeExclusionList);
+		log.info("Employee Role Code list -- "+rolecodeList);
 		//bypassing required roles from the validation
 		boolean isEmployeeSearchByStateTenantAllowed = false;
 		List<String> statelevelRolecodeExclusionList = appProps.getStatelevelRolecodeExclusionList();
+		log.info("Exclusion Employee Role Code list from proprty file -- "+statelevelRolecodeExclusionList);
+		
 		for (String rolecode : rolecodeList) {
 			if (statelevelRolecodeExclusionList.contains(rolecode)) {
 				isEmployeeSearchByStateTenantAllowed = true;
+				log.info("Exclusion Employee Role Code -- "+rolecode + "Employee Search Allowed -- "+ isEmployeeSearchByStateTenantAllowed);
 				break;
 			}
 		}
