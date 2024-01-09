@@ -25,6 +25,7 @@ import org.egov.mdms.model.ModuleDetail;
 import org.egov.tracer.model.CustomException;
 import org.postgresql.util.PGobject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -48,6 +49,9 @@ public class Util {
 	@Autowired
 	private ServiceRequestRepository serviceRequestRepository;
 
+	@Value("${statelevel.rolecode.excluded.list}")
+	private List<String> statelevelRolecodeExclusionList;
+	
 	/**
 	 * prepares mdms request
 	 * 
