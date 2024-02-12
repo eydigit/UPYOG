@@ -122,6 +122,8 @@ public class EmployeeService {
 			createUser(employee, requestInfo);
 			pwdMap.put(employee.getUuid(), employee.getUser().getPassword());
 			employee.getUser().setPassword(null);
+			log.info("Employee User Name "+employee.getUser().getUserName());
+			log.info("Employee Password "+employee.getUser().getPassword());
 		});
 		hrmsProducer.push(propertiesManager.getSaveEmployeeTopic(), employeeRequest);
 		notificationService.sendNotification(employeeRequest, pwdMap);
