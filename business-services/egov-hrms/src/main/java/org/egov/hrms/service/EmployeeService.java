@@ -122,8 +122,6 @@ public class EmployeeService {
 			createUser(employee, requestInfo);
 			pwdMap.put(employee.getUuid(), employee.getUser().getPassword());
 			employee.getUser().setPassword(null);
-			log.info("Employee User Name "+employee.getUser().getUserName());
-			log.info("Employee Password "+employee.getUser().getPassword());
 		});
 		hrmsProducer.push(propertiesManager.getSaveEmployeeTopic(), employeeRequest);
 		notificationService.sendNotification(employeeRequest, pwdMap);
@@ -228,6 +226,8 @@ public class EmployeeService {
 			employee.setUuid(user.getUuid());
 			employee.getUser().setId(user.getId());
 			employee.getUser().setUuid(user.getUuid());
+			log.info("Employee User Name :- "+employee.getUser().getUserName());
+			log.info("Employee Password :- "+employee.getUser().getPassword());
 		}catch(Exception e) {
 			log.error("Exception while creating user: ",e);
 			log.error("request: "+request);
