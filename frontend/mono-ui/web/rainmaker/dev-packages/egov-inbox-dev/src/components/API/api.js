@@ -68,7 +68,7 @@ export const workflowSearchCount = async (businessService) => {
 
 export const workflowSearch = async (businessService) => {
   return wfSearch([{ key: "tenantId", value: localStorage.getItem("inb-tenantId") }, { key: "offset", value: "0" }, { key: "limit", value: "10" }, { key: "businessService", value: businessService }])
-  // return httpRequest(`egov-workflow-v2/egov-wf/process/_search?tenantId=pb.amritsar&offset=0&limit=10&businessService=${businessService}`);
+  // return httpRequest(`egov-workflow-v2/egov-wf/process/_search?tenantId=pg.amritsar&offset=0&limit=10&businessService=${businessService}`);
 }
 
 export const wfSearch = async (queryArg = []) => {

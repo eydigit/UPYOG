@@ -83,7 +83,7 @@ android {
 			testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
 			versionCode 14
 			versionName '2.3.0'
-			resValue "string", "app_name", "mSeva-Punjab Employee"
+			resValue "string", "app_name", "mseva-up Employee"
 			resValue "string", "launcher_icon", "@mipmap/ic_launcher_employee"
 			signingConfig signingConfigs.Employee
 
@@ -130,7 +130,7 @@ android {
 			resValue "string", "launcher_icon", "@mipmap/ic_launcher_citizen"
 			signingConfig signingConfigs.Citizen
 
-			buildConfigField 'String', 'url', '"https://qa.digit.org/digit-ui/citizen"'
+			buildConfigField 'String', 'url', '"https://test.wontract.com/digit-ui/citizen"'
 			buildConfigField 'String', 'gatewayHost', '"migs.mastercard.co.in"'
 		}
 		EmployeeQA {
@@ -144,7 +144,7 @@ android {
 			resValue "string", "launcher_icon", "@mipmap/ic_launcher_employee"
 			signingConfig signingConfigs.Employee
 
-			buildConfigField 'String', 'url', '"https://qa.digit.org/digit-ui/employee"'
+			buildConfigField 'String', 'url', '"https://test.wontract.com/digit-ui/employee"'
 			buildConfigField 'String', 'gatewayHost', '"migs.mastercard.co.in"'
 		}
 		CitizenUAT{
