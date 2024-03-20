@@ -2,7 +2,22 @@
 
 # dependencies
 /node_modules
-/packages/lib/*
+/packages/lib/egov-a*
+/packages/lib/egov-b*
+/packages/lib/egov-c*
+/packages/lib/egov-f*
+/packages/lib/egov-h*
+/packages/lib/egov-i*
+/packages/lib/egov-n*
+/packages/lib/egov-p*
+/packages/lib/egov-t*
+/packages/lib/egov-w*
+/packages/lib/egov-uc
+/packages/lib/egov-ui-framework
+/packages/lib/p*
+/packages/lib/egov-ui-kit/c*
+/packages/lib/egov-ui-kit/h*
+/packages/lib/egov-ui-kit/u*
 /packages/egov-ui-framework
 /packages/pgr-citizen
 /packages/pgr-employee
